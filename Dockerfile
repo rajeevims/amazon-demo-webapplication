@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8001
 
-CMD [ "npm", "run" "build"]
+CMD [ "npm", "start" "build"]
