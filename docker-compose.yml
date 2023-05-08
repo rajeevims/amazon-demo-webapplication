@@ -1,0 +1,34 @@
+version: '3.4'
+services:
+  app:
+    container_name: web-app-amazon
+    build:
+      context: .
+      shm_size: '2gb'
+      cache_from:
+        - "node:14-alpine"
+  labels:
+      com.example.description: "devops "
+      com.example.department: "devops-technical "
+      com.example.label-with-empty-value: ""
+  ports:
+      - "8002:3000"
+  volumes:
+      - data:/react-data
+  db:
+    container_name: database 
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: demodb
+      MYSQL_USER:  dbuser
+      MYSQL_PASSWORD:  db12345
+      MYSQL_ROOT_PASSWORD: db456676
+    ports:
+      - "3030:3306"
+    depends_on:
+      - db
+volumes:
+  data:
+    external: true
